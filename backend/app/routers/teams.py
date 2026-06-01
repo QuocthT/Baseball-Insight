@@ -29,7 +29,7 @@ async def get_team_roster(team_code: str, year: int = Query(2026)):
             raise HTTPException(status_code=404, detail=f"Team '{team_code}' not found")
 
         hitting = await sheets_service.fetch_hitting(year)
-        roster = [r for r in hitting if r.get("Team", "").upper() == team_code and int(r.get("G", 0)) > 0]
+        roster = [r for r in hitting if r.get("Team", "").upper() == team_code and int(r.get("G") or 0) > 0]
 
         return {
             "status": "success",

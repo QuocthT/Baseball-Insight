@@ -9,7 +9,7 @@ async def get_all_players(year: int = Query(2026)):
     try:
         data = await sheets_service.fetch_hitting(year)
         players = [
-            {"name": row["Name"], "team": row["Team"], "nationality": row["Nationality"]}
+            {"name": row.get("Name"), "team": row.get("Team"), "nationality": row.get("Nationality")}
             for row in data if row.get("Name")
         ]
         return {"status": "success", "players": players}
