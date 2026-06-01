@@ -1,6 +1,10 @@
+from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv(dotenv_path=Path(__file__).parent.parent / ".env")
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import sheets, players, teams
+from app.routers import sheets, players, teams, ai, upload
 
 app = FastAPI(
     title="Baseball Insight API",
@@ -27,3 +31,5 @@ def health():
 app.include_router(sheets.router, prefix="/api/sheets", tags=["sheets"])
 app.include_router(players.router, prefix="/api/players", tags=["players"])
 app.include_router(teams.router, prefix="/api/teams", tags=["teams"])
+app.include_router(ai.router, prefix="/api/ai", tags=["ai"])
+app.include_router(upload.router, prefix="/api/upload", tags=["upload"])
