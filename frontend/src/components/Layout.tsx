@@ -1,4 +1,5 @@
 import { Outlet, NavLink } from 'react-router-dom'
+import ScoreboardBanner from './ScoreboardBanner'
 
 export default function Layout() {
   const navClass = ({ isActive }: { isActive: boolean }) =>
@@ -24,9 +25,11 @@ export default function Layout() {
             <NavLink to="/" end className={navClass}>Dashboard</NavLink>
             <NavLink to="/players" className={navClass}>Players</NavLink>
             <NavLink to="/teams" className={navClass}>Teams</NavLink>
+            <NavLink to="/games" className={navClass}>Scores</NavLink>
           </nav>
         </div>
       </header>
+      <ScoreboardBanner />
 
       {/* Page content */}
       <main className="max-w-7xl mx-auto px-4 py-8">

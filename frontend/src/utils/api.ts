@@ -35,3 +35,15 @@ export async function fetchPlayer(name: string, year: number = 2026) {
   const data = await res.json()
   return data
 }
+
+export async function fetchGames() {
+  const res = await fetch(`${BASE_URL}/api/games/`)
+  const data = await res.json()
+  return (data.games || []) as any[]
+}
+
+export async function fetchGame(gameId: string) {
+  const res = await fetch(`${BASE_URL}/api/games/${encodeURIComponent(gameId)}`)
+  if (!res.ok) return null
+  return res.json()
+}
