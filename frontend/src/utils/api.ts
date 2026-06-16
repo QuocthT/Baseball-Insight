@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_API_URL || 'https://trustworthy-emotion-production-e077.up.railway.app'
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 
 export async function fetchHitting(year: number = 2026) {
   const res = await fetch(`${BASE_URL}/api/sheets/hitting/${year}`)
