@@ -22,6 +22,8 @@ interface GameDetail {
   home_batting: any[]
   visitor_pitching: any[]
   home_pitching: any[]
+  visitor_fielding: any[]
+  home_fielding: any[]
 }
 
 function fmt(val: any, decimals = 3): string {
@@ -104,6 +106,57 @@ function PitchingTable({ rows, teamName }: { rows: any[], teamName: string }) {
   return (
     <div>
       <h3 className="text-base font-bold text-gray-300 mb-2">{teamName} Pitching</h3>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-gray-700">
+              {cols.map(c => (
+                <th
+                  key={c.key}
+                  className={`py-2 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wide ${c.align === 'left' ? 'text-left' : 'text-center'}`}
+                >
+                  {c.label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, i) => (
+              <tr key={i} className="border-b border-gray-800 hover:bg-gray-800/40">
+                {cols.map(c => (
+                  <td
+                    key={c.key}
+                    className={`py-2 px-3 ${c.align === 'left' ? 'text-left text-white font-medium' : 'text-center text-gray-300'}`}
+                  >
+                    {c.key === 'Name'
+                      ? (row[c.key] || '').trim()
+                      : c.decimals !== undefined
+                        ? fmt(row[c.key], c.decimals)
+                        : (row[c.key] ?? '—')}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
+
+function FieldingTable({ rows, teamName }: { rows: any[], teamName: string }) {
+  const cols = [
+    { key: 'Name', label: 'Fielder', align: 'left' },
+    { key: 'PO',   label: 'PO',     align: 'center' },
+    { key: 'A',    label: 'A',      align: 'center' },
+    { key: 'ERR',  label: 'E',      align: 'center' },
+    { key: 'DP',   label: 'DP',     align: 'center' },
+    { key: 'FP',   label: 'FP',     align: 'center', decimals: 3 },
+  ]
+
+  return (
+    <div>
+      <h3 className="text-base font-bold text-gray-300 mb-2">{teamName} Fielding</h3>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
@@ -258,6 +311,12 @@ export default function GameDetail() {
       <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 space-y-8">
         <PitchingTable rows={game.visitor_pitching} teamName={game.visitor} />
         <PitchingTable rows={game.home_pitching} teamName={game.home} />
+      </div>
+
+      {/* Fielding stats */}
+      <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 space-y-8">
+        <FieldingTable rows={game.visitor_fielding} teamName={game.visitor} />
+        <FieldingTable rows={game.home_fielding} teamName={game.home} />
       </div>
     </div>
   )

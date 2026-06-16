@@ -167,5 +167,7 @@ class GameService:
                 "home_batting":     _csv_players(p / "statsHomeBatting.csv"),
                 "visitor_pitching": _csv_players(p / "statsVisitorPitching.csv"),
                 "home_pitching":    _csv_players(p / "statsHomePitching.csv"),
+                "visitor_fielding": _csv_players(p / "statsVisitorFielding.csv"),
+                "home_fielding":    _csv_players(p / "statsHomeFielding.csv"),
             }
         return None
