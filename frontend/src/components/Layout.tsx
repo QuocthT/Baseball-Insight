@@ -18,7 +18,7 @@ export default function Layout() {
             <span className="text-2xl">⚾</span>
             <div>
               <h1 className="text-lg font-bold text-white leading-none">Baseball Insight</h1>
-              <p className="text-xs text-gray-400">PLB / Ekstraliga Stats</p>
+              <p className="text-xs text-gray-400">PLB Stats</p>
             </div>
           </div>
           <nav className="flex items-center gap-2">
